@@ -1,0 +1,48 @@
+---
+name: Update GitHub Info
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pull-requests: read
+tools:
+  edit:
+  web-fetch:
+safe-outputs:
+  create-pull-request:
+    draft: true
+    fallback-as-issue: false
+network:
+  allowed:
+    - github.blog
+---
+
+# Update GitHub Info
+
+Update the GitHub Info page with fresh items from the GitHub Blog and GitHub Changelog, then open a pull request for Mona to review instead of writing directly to `main`.
+
+## Instructions
+
+1. Read `notes/mona-notes.md` first and follow those editorial guidelines closely.
+2. Fetch both of these pages:
+   - https://github.blog/latest/
+   - https://github.blog/changelog/
+3. Review `site/content/github-info.md` and update only the `Latest GitHub Updates` section unless the notes explicitly justify a broader edit.
+4. Keep updates short, practical, and useful for developers learning GitHub faster.
+5. Mention the source for each new item you add, using either GitHub Blog or GitHub Changelog.
+6. Remove stale items when needed so the section stays current.
+7. Do not push directly to `main`. Propose the content change with the safe output `create-pull-request`.
+8. Open a pull request for Mona to review.
+
+## Pull Request Requirements
+
+- Title: `chore: update GitHub info`
+- Include a brief summary of what was added, updated, or removed.
+- Include links to the GitHub Blog or GitHub Changelog entries that informed the update.
+- Ask Mona to review the pull request before merge.
+
+## Usage
+
+Run this workflow on its daily schedule or trigger it manually with `workflow_dispatch`.
