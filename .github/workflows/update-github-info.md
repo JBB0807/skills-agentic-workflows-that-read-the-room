@@ -1,8 +1,6 @@
 ---
 name: Update GitHub Info
 on:
-  schedule:
-    - cron: '0 8 * * *'
   workflow_dispatch:
 permissions:
   contents: read
